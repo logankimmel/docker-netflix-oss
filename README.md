@@ -1,4 +1,4 @@
-# Docker SpringBoot Eureka Zuul Demo App
+# Docker Spring Eureka Zuul - Demo App
 Example application that contains multiple a springboot service that registers with a Eureka Registry.  
 Zuul then serves the requests to these services based on the provided app name
 
