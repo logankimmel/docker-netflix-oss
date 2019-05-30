@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  eureka:
+    image: microservice/eureka:1
+    deploy:
+      replicas: 1
+    ports:
+     - "8761:8761"
+  logan:
+    image: microservice/e-client:7
+    deploy:
+      replicas: 2
+    environment:
+      EUREKA_HOSTNAME: eureka
+      APP: logan
+      C_NAME: logan-{{ .Task.Slot }}
+  steve:
+    image: microservice/e-client:7
+    deploy:
+      replicas: 2
+    environment:
+      EUREKA_HOSTNAME: eureka
+      APP: steve
+      C_NAME: steve-{{ .Task.Slot }}
+  zuul:
+    image: microservice/zuul:5
+    hostname: zuul
+    deploy:
+      replicas: 1
+    ports:
+     - "9090:9090"
+    environment:
+      EUREKA_HOSTNAME: eureka
